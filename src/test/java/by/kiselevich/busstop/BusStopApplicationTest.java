@@ -14,7 +14,7 @@ public class BusStopApplicationTest {
 
     @Test
     public void test1() throws IOException, URISyntaxException {
-        String fullFilename = getClass().getClassLoader().getResource("test_data1.txt").getFile();
+        String fullFilename = Paths.get(getClass().getClassLoader().getResource("test_data1.txt").toURI()).toString();
         BusStopApplication.main(new String[]{fullFilename});
         List<String> expectedData = Files.readAllLines(Paths.get(getClass().getClassLoader().getResource("output1.txt").toURI()));
         List<String> actualData = Files.readAllLines(Path.of("output.txt"));
