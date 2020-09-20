@@ -1,10 +1,16 @@
 package by.kiselevich.busstop.domain;
 
 public enum ServiceName {
-    POSH, GROTTY;
+    POSH("Posh"), GROTTY("Grotty");
+
+    private final String canonicalName;
+
+    ServiceName(String canonicalName) {
+        this.canonicalName = canonicalName;
+    }
 
     @Override
     public String toString() {
-        return super.toString().toLowerCase();
+        return canonicalName;
     }
 }
