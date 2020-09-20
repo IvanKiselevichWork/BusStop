@@ -59,4 +59,80 @@ public class BusServiceFileWriterTest {
         List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
         Assert.assertFalse(Arrays.equals(expectedData.toArray(), actualData.toArray()));
     }
+
+    @Test
+    public void test3() throws IOException {
+        busServiceFileWriter.writeToFile(TEST_FILENAME,
+                List.of(
+                        new BusService(ServiceName.POSH, LocalTime.of(10, 10), LocalTime.of(11, 0)),
+                        new BusService(ServiceName.POSH, LocalTime.of(10, 10), LocalTime.of(11, 1)))
+        );
+        List<String> expectedData = List.of(
+                "Posh 10:10 11:00",
+                "Posh 10:10 11:01"
+        );
+        List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
+        Assert.assertArrayEquals(expectedData.toArray(), actualData.toArray());
+    }
+
+    @Test
+    public void test4() throws IOException {
+        busServiceFileWriter.writeToFile(TEST_FILENAME,
+                List.of(
+                        new BusService(ServiceName.POSH, LocalTime.of(10, 10), LocalTime.of(11, 0)))
+        );
+        List<String> expectedData = List.of(
+                "Posh 10:10 11:00"
+        );
+        List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
+        Assert.assertArrayEquals(expectedData.toArray(), actualData.toArray());
+    }
+
+    @Test
+    public void test5() throws IOException {
+        busServiceFileWriter.writeToFile(TEST_FILENAME,
+                List.of(
+                        new BusService(ServiceName.GROTTY, LocalTime.of(10, 10), LocalTime.of(11, 0)))
+                );
+        List<String> expectedData = List.of(
+                "Grotty 10:10 11:00"
+        );
+        List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
+        Assert.assertArrayEquals(expectedData.toArray(), actualData.toArray());
+    }
+
+    @Test
+    public void test6() throws IOException {
+        busServiceFileWriter.writeToFile(TEST_FILENAME,
+                List.of(
+                        new BusService(ServiceName.GROTTY, LocalTime.of(10, 10), LocalTime.of(11, 0)),
+                        new BusService(ServiceName.GROTTY, LocalTime.of(10, 10), LocalTime.of(11, 1)))
+        );
+        List<String> expectedData = List.of(
+                "Grotty 10:10 11:00",
+                "Grotty 10:10 11:01"
+        );
+        List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
+        Assert.assertArrayEquals(expectedData.toArray(), actualData.toArray());
+    }
+
+    @Test
+    public void test7() throws IOException {
+        busServiceFileWriter.writeToFile(TEST_FILENAME,
+                List.of(
+                        new BusService(ServiceName.POSH, LocalTime.of(10, 10), LocalTime.of(11, 0)),
+                        new BusService(ServiceName.POSH, LocalTime.of(10, 10), LocalTime.of(11, 0)),
+                        new BusService(ServiceName.GROTTY, LocalTime.of(10, 10), LocalTime.of(11, 0)),
+                        new BusService(ServiceName.GROTTY, LocalTime.of(10, 10), LocalTime.of(11, 0)))
+        );
+        List<String> expectedData = List.of(
+                "Posh 10:10 11:00",
+                "Posh 10:10 11:00",
+                "",
+                "Grotty 10:10 11:01",
+                "Grotty 10:10 11:01"
+        );
+        List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
+        Assert.assertFalse(Arrays.equals(expectedData.toArray(), actualData.toArray()));
+    }
 }
