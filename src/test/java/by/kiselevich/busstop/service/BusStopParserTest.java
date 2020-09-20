@@ -13,7 +13,6 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class BusStopParserTest {
