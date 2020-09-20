@@ -37,6 +37,7 @@ public class BusServiceFileWriterTest {
         );
         List<String> expectedData = List.of(
                 "Posh 10:10 11:00",
+                "",
                 "Grotty 10:10 11:00"
         );
         List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
@@ -52,6 +53,7 @@ public class BusServiceFileWriterTest {
         );
         List<String> expectedData = List.of(
                 "Posh 10:10 11:00",
+                "",
                 "Grotty 10:10 11:01"
         );
         List<String> actualData = Files.readAllLines(Path.of(TEST_FILENAME));
